@@ -1,21 +1,117 @@
-// src/styles/home.scss
-
 // Variables globales
 $primary-color: #8E46E5;
 $bg-color: #f0f0f0;
 $text-color: #000000;
 $box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+$success-color: #34C759;
+$danger-color: #FF3B30;
+$link-color: #007AFF;
+
+// Estilos para el resumen financiero
+.summary-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 20px 0;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0; // Previene desbordamiento en contenedores flex
+
+  @media (max-width: 768px) {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  @media (max-width: 360px) {
+    padding: 4px;
+    gap: 4px;
+  }
+}
+
+.summary-item {
+  background-color: #F2F2F7;
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: transform 0.2s ease;
+  min-width: 0; // Previene desbordamiento
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  .summary-label {
+    font-size: min(14px, 3.5vw);
+    color: #666;
+    margin-bottom: 2px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .summary-value {
+    font-size: min(20px, 5vw);
+    font-weight: 700;
+    color: $text-color;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+    &.positive {
+      color: $success-color;
+    }
+    
+    &.negative {
+      color: $danger-color;
+    }
+  }
+
+  .summary-period {
+    font-size: min(12px, 3vw);
+    color: #666;
+    margin-top: 2px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media (max-width: 360px) {
+      font-size: 10px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 8px;
+  }
+
+  @media (max-width: 360px) {
+    padding: 6px;
+  }
+  }
+
 
 
 // Contenedor principal centrado
 .inicio-container {
-  width: 90vw;  
-  height: 95vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 10px;
-  margin: 0 auto;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-overflow-scrolling: touch;
+  background-color: #fff;
+  padding: var(--page-padding);
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  width: 100%;
+  max-width: 100%;
 }
 
 .empty-accounts {
@@ -170,6 +266,73 @@ $box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
   font-size: 1rem;
   color: #777;
   margin-top: 20px;
+}
+
+// Estilos para las transacciones recientes
+.recent-transactions {
+  margin-top: 16px;
+
+  .transaction-item {
+    background-color: #F2F2F7;
+    margin-bottom: 8px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .transaction-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .transaction-date {
+        color: #666;
+        font-size: 12px;
+      }
+
+      .transaction-account {
+        color: #000;
+        font-size: 14px;
+      }
+    }
+
+    .transaction-amount {
+      font-weight: 600;
+      
+      &.ingreso {
+        color: $success-color;
+      }
+      
+      &.gasto {
+        color: $danger-color;
+      }
+    }
+  }
+}
+
+.view-all-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+
+  .view-all-button {
+    border: none;
+    background: none;
+    color: $link-color;
+    font-size: 14px;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.no-transactions {
+  text-align: center;
+  color: #666;
+  padding: 20px;
 }
 
 .transactions-container {
