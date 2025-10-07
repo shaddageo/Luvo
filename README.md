@@ -23,9 +23,9 @@
 
 ## 🎯 Acerca del Proyecto
 
-MoneyTrack es una **aplicación web progresiva (PWA)** diseñada para ayudar a los usuarios a **registrar y gestionar sus finanzas personales** de manera sencilla, intuitiva y accesible. Con un enfoque en la experiencia del usuario y la funcionalidad offline, MoneyTrack permite mejorar la salud financiera mediante visualizaciones interactivas y un control detallado de ingresos, gastos y metas de ahorro.
+Luvo es una **aplicación web progresiva (PWA)** diseñada para ayudar a los usuarios a **registrar y gestionar sus finanzas personales** de manera sencilla, intuitiva y accesible. Con un enfoque en la experiencia del usuario y la funcionalidad offline, MoneyTrack permite mejorar la salud financiera mediante visualizaciones interactivas y un control detallado de ingresos, gastos y metas de ahorro.
 
-### 🌟 ¿Por qué MoneyTrack?
+### 🌟 ¿Por qué Luvo?
 
 - 🚫 **Sin dependencias de internet** - Funciona 100% offline
 - 📊 **Visualizaciones inteligentes** - Gráficos interactivos con Chart.js
