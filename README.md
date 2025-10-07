@@ -2,8 +2,6 @@
 
 <img src="https://github.com/shaddageo/MoneyTrackAM/blob/main/assets/logo.png" alt="MoneyTrack Logo" width="200" height="200" />
 
-# 💰 MoneyTrack
-
 ### Tu Asistente Financiero Personal
 
 <p>
