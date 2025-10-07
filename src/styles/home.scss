@@ -242,7 +242,7 @@ $link-color: #007AFF;
   font-size: 18px;
   font-weight: bold;
   color: $text-color;
-  margin: 10px 0;
+  margin: 20px 0 10px 0;
 }
 
 .budget-box {
@@ -275,12 +275,17 @@ $link-color: #007AFF;
 // Contenedor del gráfico
 .chart-container {
   width: 100%;
-  height: 200px;
-  padding: 4px;
+  height: 250px;
+  padding: 10px 4px 20px 4px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
+  margin-bottom: 40px;
+  
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
 }
 
 // Botón flotante (si se requiere)
@@ -406,7 +411,8 @@ $link-color: #007AFF;
     grid-template-columns: 1fr;
   }
   .chart-container {
-    height: 150px;
-    padding: 2px;
+    height: 200px;
+    padding: 8px 2px 16px 2px;
+    margin-bottom: 20px;
   }
 }
