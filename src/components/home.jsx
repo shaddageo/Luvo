@@ -4,9 +4,11 @@ import Navbar from "../components/navbar";
 import { obtenerCuentas } from "../utils/createAccount";
 import { generateChart } from "../utils/generateChart";
 import "../styles/home.scss";
+import "../styles/savingGoal.scss";
 import "../main.scss";
 import plusIcon from "../assets/plus.svg";
 import Header from "../components/Header";
+import SavingGoalModal from "./SavingGoalModal";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ const Home = () => {
   const [greeting, setGreeting] = useState("");
   const [accounts, setAccounts] = useState([]);
   const [totalBalance, setTotalBalance] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [savingGoal, setSavingGoal] = useState(() => {
     const saved = localStorage.getItem('savingGoal');
     return saved ? JSON.parse(saved) : null;
@@ -216,68 +219,98 @@ const Home = () => {
           </div>
         )}
 
-        <h2 className="section-title">Tu meta de ahorro</h2>
+        <div className="section-header">
+          <h2 className="section-title">Tu meta de ahorro</h2>
+          <div className="create-goal-button" onClick={() => setIsModalOpen(true)}>
+            Crear meta →
+          </div>
+        </div>
         {savingGoal ? (
-          <div className="saving-goal-container">
+          <div 
+            className="saving-goal-container"
+            onClick={() => setIsModalOpen(true)}
+          >
             <div className="saving-goal-info">
               <div className="goal-details">
-                <span>Fecha meta: {savingGoal.targetDate}</span>
-                <span>Proyección: {formatNumber(savingGoal.currentAmount)}</span>
-                <span>Falta: ${formatNumber(savingGoal.targetAmount - savingGoal.currentAmount)}</span>
+                <span>{savingGoal.name}</span>
+                <span>${formatNumber(savingGoal.currentAmount)} de ${formatNumber(savingGoal.targetAmount)}</span>
+                <div className="progress-bar">
+                  <div
+                    className="progress"
+                    style={{
+                      width: `${Math.min((savingGoal.currentAmount / savingGoal.targetAmount) * 100, 100)}%`
+                    }}
+                  ></div>
+                </div>
               </div>
-              <div className="progress-bar">
-                <div 
-                  className="progress" 
-                  style={{
-                    width: `${Math.min((savingGoal.currentAmount / savingGoal.targetAmount) * 100, 100)}%`
-                  }}
-                ></div>
+              <div className="meta-info">
+                <div className="info-block">
+                  <span>Fecha meta</span>
+                  <span>Dic 2025</span>
+                </div>
+                <div className="info-block">
+                  <span>Proyección</span>
+                  <span>Adelantado según plan</span>
+                </div>
+                <div className="info-block">
+                  <span>Falta</span>
+                  <span>${formatNumber(savingGoal.targetAmount - savingGoal.currentAmount)}</span>
+                </div>
               </div>
             </div>
           </div>
-        ) : (
-          <div className="create-goal-button" onClick={() => navigate('/create-goal')}>
-            Crear meta →
-          </div>
-        )}
+        ) : null}
 
+        <SavingGoalModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          initialData={savingGoal}
+          onSave={(goal) => {
+            setSavingGoal(goal);
+            localStorage.setItem('savingGoal', JSON.stringify(goal));
+          }}
+          onDelete={() => {
+            setSavingGoal(null);
+            localStorage.removeItem('savingGoal');
+          }}
+        />
         <h2 className="section-title">Transacciones Recientes</h2>
-          <div className="recent-transactions">
-            {accounts.length > 0 ? (
-              <>
-                {recentTransactions.slice(0, 4).map((transaction, index) => (
-                  <div key={index} className="transaction-item">
-                    <div className="transaction-info">
-                      <span className="transaction-date">
-                        {new Date(transaction.fecha).toLocaleDateString('es-ES', { 
-                          month: 'short', 
-                          day: 'numeric',
-                          hour: '2-digit',
-                          minute: '2-digit'
-                        })}
-                      </span>
-                      <span className="transaction-account">{transaction.cuenta}</span>
-                    </div>
-                    <span className={`transaction-amount ${transaction.tipo}`}>
-                      {transaction.tipo === 'gasto' ? '-' : '+'}${formatNumber(transaction.monto)}
+        <div className="recent-transactions">
+          {accounts.length > 0 ? (
+            <>
+              {recentTransactions.slice(0, 4).map((transaction, index) => (
+                <div key={index} className="transaction-item">
+                  <div className="transaction-info">
+                    <span className="transaction-date">
+                      {new Date(transaction.fecha).toLocaleDateString('es-ES', {
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
                     </span>
+                    <span className="transaction-account">{transaction.cuenta}</span>
                   </div>
-                ))}
-                {recentTransactions.length > 0 && (
-                  <div className="view-all-button-container">
-                    <button 
-                      className="view-all-button" 
-                      onClick={() => navigate('/transactions')}
-                    >
-                      Ver todas →
-                    </button>
-                  </div>
-                )}
-              </>
-            ) : (
-              <p className="no-transactions">No hay transacciones recientes</p>
-            )}
-          </div>        <h2 className="section-title-2">Gráfico Histórico</h2>
+                  <span className={`transaction-amount ${transaction.tipo}`}>
+                    {transaction.tipo === 'gasto' ? '-' : '+'}${formatNumber(transaction.monto)}
+                  </span>
+                </div>
+              ))}
+              {recentTransactions.length > 0 && (
+                <div className="view-all-button-container">
+                  <button
+                    className="view-all-button"
+                    onClick={() => navigate('/transactions')}
+                  >
+                    Ver todas →
+                  </button>
+                </div>
+              )}
+            </>
+          ) : (
+            <p className="no-transactions">No hay transacciones recientes</p>
+          )}
+        </div>        <h2 className="section-title-2">Gráfico Histórico</h2>
         <div className="chart-container">
           {accounts.length > 0 ? (
             <canvas ref={chartRef} id="budgetChart"></canvas>

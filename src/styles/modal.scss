@@ -49,17 +49,42 @@ $border-radius: 10px;
     margin-bottom: 20px;
   }
 
-  button {
-    background-color: $primary-color;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
+  .modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
 
-    &:hover {
-      background-color: $primary-hover;
+    .cancel-button {
+      background-color: #e0e0e0;
+      color: #666;
+    }
+
+    .delete-button {
+      background-color: #ff3b30;
+      color: white;
+      
+      &:hover {
+        background-color: #ff1f1f;
+      }
+    }
+
+    .save-button {
+      background-color: $primary-color;
+      color: white;
+      
+      &:hover {
+        background-color: $primary-hover;
+      }
+    }
+
+    button {
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      font-size: 14px;
     }
   }
 }

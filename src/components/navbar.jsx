@@ -19,10 +19,18 @@ const Navbar = () => {
 
             {/* Barra de navegación */}
             <nav className="navbar">
-                <Link to="/home" className="nav-item">
+                <div 
+                    className="nav-item" 
+                    onClick={() => {
+                        const currentPath = window.location.pathname;
+                        if (currentPath !== "/home") {
+                            navigate("/home");
+                        }
+                    }}
+                >
                     <img src={houseIcon} alt="Inicio" />
                     <span>Inicio</span>
-                </Link>
+                </div>
                 <Link to="/transactions" className="nav-item">
                     <img src={moneyIcon} alt="Transacciones" />
                     <span>Transacciones</span>
