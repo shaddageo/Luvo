@@ -48,8 +48,13 @@ const CrearCuentaBancaria = () => {
       console.log("Error al agregar cuenta:", resultado.error);
       return;
     }
+    
+    // ✅ NUEVO - Emitir eventos de actualización
+    window.dispatchEvent(new Event('cuentasChanged'));
+    window.dispatchEvent(new Event('storage'));
+    console.log("✅ Cuenta agregada y eventos emitidos");
+    
     showModal(resultado.success, true);
-    console.log("Cuenta agregada exitosamente");
   };
 
   const showModal = (message, redirect = false) => {
