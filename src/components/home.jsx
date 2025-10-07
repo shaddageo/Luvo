@@ -4,6 +4,7 @@ import Navbar from "../components/navbar";
 import { obtenerCuentas } from "../utils/createAccount";
 import { generateChart } from "../utils/generateChart";
 import "../styles/home.scss";
+import "../main.scss";
 import plusIcon from "../assets/plus.svg";
 import Header from "../components/Header";
 
@@ -13,6 +14,11 @@ const Home = () => {
   const [greeting, setGreeting] = useState("");
   const [accounts, setAccounts] = useState([]);
   const [totalBalance, setTotalBalance] = useState(0);
+  const [savingGoal, setSavingGoal] = useState(() => {
+    const saved = localStorage.getItem('savingGoal');
+    return saved ? JSON.parse(saved) : null;
+  });
+  const [recentTransactions, setRecentTransactions] = useState([]);
   const chartRef = useRef(null);
 
   // Carga las cuentas desde localStorage y recalcula el saldo basado en las transacciones
@@ -72,6 +78,23 @@ const Home = () => {
     console.log("Saludo configurado:", saludo);
 
     loadAccounts();
+    
+    // Cargar transacciones recientes
+    const transaccionesStorage = JSON.parse(localStorage.getItem("transacciones")) || {};
+    const todasLasTransacciones = [];
+    
+    Object.values(transaccionesStorage).forEach(transaccionesMes => {
+      transaccionesMes.forEach(t => {
+        todasLasTransacciones.push({
+          ...t,
+          fecha: new Date(t.fecha)
+        });
+      });
+    });
+    
+    // Ordenar por fecha más reciente
+    todasLasTransacciones.sort((a, b) => b.fecha - a.fecha);
+    setRecentTransactions(todasLasTransacciones);
   }, [loadAccounts]);
 
   // Escucha eventos de cambios en cuentas o transacciones para actualizar los datos
@@ -115,7 +138,22 @@ const Home = () => {
 
   return (
     <>
-      <div className="inicio-container">
+      <div className="inicio-container" style={{
+        height: '100vh',
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        WebkitOverflowScrolling: 'touch',
+        backgroundColor: '#fff',
+        padding: 'var(--page-padding)',
+        paddingBottom: 'calc(80px + env(safe-area-inset-bottom))',
+        width: '100%',
+        maxWidth: '100%'
+      }}>
         <Header />
         <h1 className="page-title" id="welcomeUser">
           {greeting}, {username}
@@ -158,6 +196,62 @@ const Home = () => {
               ${formatNumber(totalBalance)}
             </p>
           </div>
+        </div>
+
+        <h2 className="section-title">Tu meta de ahorro</h2>
+        {savingGoal ? (
+          <div className="saving-goal-container">
+            <div className="saving-goal-info">
+              <div className="goal-details">
+                <span>Fecha meta: {savingGoal.targetDate}</span>
+                <span>Proyección: {formatNumber(savingGoal.currentAmount)}</span>
+                <span>Falta: ${formatNumber(savingGoal.targetAmount - savingGoal.currentAmount)}</span>
+              </div>
+              <div className="progress-bar">
+                <div 
+                  className="progress" 
+                  style={{
+                    width: `${Math.min((savingGoal.currentAmount / savingGoal.targetAmount) * 100, 100)}%`
+                  }}
+                ></div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="create-goal-button" onClick={() => navigate('/create-goal')}>
+            Crear meta →
+          </div>
+        )}
+
+        <h2 className="section-title">Transacciones Recientes</h2>
+        <div className="recent-transactions">
+          {accounts.length > 0 ? (
+            recentTransactions.slice(0, 4).map((transaction, index) => (
+              <div key={index} className="transaction-item">
+                <div className="transaction-info">
+                  <span className="transaction-date">
+                    {new Date(transaction.fecha).toLocaleDateString('es-ES', { 
+                      month: 'short', 
+                      day: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })}
+                  </span>
+                  <span className="transaction-account">{transaction.cuenta}</span>
+                </div>
+                <span className={`transaction-amount ${transaction.tipo}`}>
+                  {transaction.tipo === 'gasto' ? '-' : '+'}${formatNumber(transaction.monto)}
+                </span>
+              </div>
+            ))
+          ) : (
+            <p className="no-transactions">No hay transacciones recientes</p>
+          )}
+          {recentTransactions.length > 0 && (
+            <button className="view-all-button" onClick={() => navigate('/transactions')}>
+              Ver todas →
+            </button>
+          )}
         </div>
 
         <h2 className="section-title-2">Gráfico Histórico</h2>
