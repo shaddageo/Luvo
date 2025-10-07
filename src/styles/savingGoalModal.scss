@@ -1,6 +1,7 @@
 // Variables
+@use "sass:color";
 $primary-color: #8E46E5;
-$primary-hover: darken($primary-color, 10%);
+$primary-hover: color.adjust($primary-color, $lightness: -10%);
 $danger-color: #ff3b30;
 $text-color: #333;
 $border-radius: 8px;
@@ -127,7 +128,7 @@ $border-radius: 8px;
         color: #666;
 
         &:hover {
-          background-color: darken(#e0e0e0, 5%);
+          background-color: color.adjust(#e0e0e0, $lightness: -5%);
         }
       }
 
@@ -136,7 +137,7 @@ $border-radius: 8px;
         color: white;
 
         &:hover {
-          background-color: darken($danger-color, 5%);
+          background-color: color.adjust($danger-color, $lightness: -5%);
         }
       }
 

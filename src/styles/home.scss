@@ -213,15 +213,28 @@ $link-color: #007AFF;
   background-color: rgba(209, 209, 209, 0.32);
   color: rgba(0, 0, 0, 0.54);
   margin-bottom: 20px;
+  padding: 4px;  // Reducido de 6px a 4px
+  height: 50px;  // Altura fija más pequeña
+  min-height: unset;  // Eliminar altura mínima heredada
+  display: flex;
+  flex-direction: row;  // Cambiado a row para alinear horizontalmente
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background-color: #dfdede;
   }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+  }
 }
 
 .plus-icon {
-  width: 18px;
-  margin-bottom: 10px;
+  width: 14px;  // Reducido de 18px a 14px
+  margin: 0;    // Eliminado el margin-bottom
 }
 
 // Sección de presupuesto y títulos

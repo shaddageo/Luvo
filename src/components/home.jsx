@@ -274,7 +274,12 @@ const Home = () => {
             localStorage.removeItem('savingGoal');
           }}
         />
-        <h2 className="section-title">Transacciones Recientes</h2>
+        <div className="section-header">
+          <h2 className="section-title">Transacciones Recientes</h2>
+          <div className="create-goal-button" onClick={() => navigate('/transactions')}>
+            Ver todas →
+          </div>
+        </div>
         <div className="recent-transactions">
           {accounts.length > 0 ? (
             <>
@@ -296,16 +301,7 @@ const Home = () => {
                   </span>
                 </div>
               ))}
-              {recentTransactions.length > 0 && (
-                <div className="view-all-button-container">
-                  <button
-                    className="view-all-button"
-                    onClick={() => navigate('/transactions')}
-                  >
-                    Ver todas →
-                  </button>
-                </div>
-              )}
+
             </>
           ) : (
             <p className="no-transactions">No hay transacciones recientes</p>

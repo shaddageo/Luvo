@@ -16,6 +16,16 @@ const SavingGoalModal = ({ isOpen, onClose, onSave, onDelete, initialData }) => 
                                parseFloat(additionalAmount.replace(/\./g, '').replace(',', '.'));
         setCurrentAmount(newCurrentAmount.toString());
         setAdditionalAmount('');
+        
+        // Guardar los cambios inmediatamente
+        const goal = {
+            name,
+            targetAmount: parseFloat(targetAmount.replace(/\./g, '').replace(',', '.')),
+            currentAmount: newCurrentAmount,
+            targetDate,
+            percentage: Math.min((newCurrentAmount / parseFloat(targetAmount.replace(/\./g, '').replace(',', '.'))) * 100, 100)
+        };
+        onSave(goal);
     };
     
     const percentage = targetAmount && currentAmount 
