@@ -1,26 +1,167 @@
-# MoneyTrack
+# 💰 MoneyTrack
 
-## Descripción
-MoneyTrack es una aplicación web diseñada para ayudar a los usuarios a registrar y gestionar sus ingresos y gastos de manera sencilla y accesible. Su objetivo es mejorar la salud financiera al permitir visualizar transacciones mediante gráficos interactivos y llevar un control detallado de las finanzas, **sin requerir conexión a internet**.
+<div align="center">
 
-## Características
-- Registro de ingresos y gastos.
-- Visualización de transacciones mediante gráficos interactivos.
-- Gestión de cuentas bancarias con resumen de ingresos, gastos y total.
-- Funcionalidad offline: toda la lógica y el contenido se integran en el bundle final.
-- Interfaz responsive desarrollada con SASS y clases parciales.
+**Tu Asistente Financiero Personal**
 
-## Tecnologías Utilizadas
-- **React** y **Vite** para el frontend.
-- **SASS** para la gestión de estilos.
-- **JavaScript** para la lógica de la aplicación.
-- **Chart.js** para la generación de gráficos.
-- **react-number-format** para el formateo de números.
-- **React Router** para la navegación.
-- **Git** para el control de versiones.
+[![React](https://img.shields.io/badge/React-18.x-blue?logo=react)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?logo=vite)](https://vitejs.dev/)
+[![SASS](https://img.shields.io/badge/SASS-1.x-CC6699?logo=sass)](https://sass-lang.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## Estructura del Proyecto
-La estructura base del proyecto es la siguiente:
+</div>
+
+---
+
+## 🎯 Acerca del Proyecto
+
+MoneyTrack es una **aplicación web progresiva (PWA)** diseñada para ayudar a los usuarios a **registrar y gestionar sus finanzas personales** de manera sencilla, intuitiva y accesible. Con un enfoque en la experiencia del usuario y la funcionalidad offline, MoneyTrack permite mejorar la salud financiera mediante visualizaciones interactivas y un control detallado de ingresos, gastos y metas de ahorro.
+
+### 🌟 ¿Por qué MoneyTrack?
+
+- 🚫 **Sin dependencias de internet** - Funciona 100% offline
+- 📊 **Visualizaciones inteligentes** - Gráficos interactivos con Chart.js
+- 🎯 **Metas de ahorro** - Sistema de seguimiento con proyecciones
+- 💼 **Múltiples cuentas** - Gestiona todas tus finanzas en un solo lugar
+- ⚡ **Rápido y eficiente** - Optimizado con Vite
+- 🎨 **Diseño moderno** - Interfaz responsive y atractiva
+
+---
+
+## ✨ Características Principales
+
+### 💰 Gestión de Cuentas
+- ✅ Agregar múltiples cuentas bancarias y billeteras digitales
+- ✅ Visualización de balance total con tendencias
+- ✅ Estados de cuenta activas e inactivas
+- ✅ Colores personalizables por cuenta
+
+### 📊 Transacciones
+- ✅ Registro de ingresos y gastos con categorías
+- ✅ Filtros avanzados por fecha, tipo y cuenta
+- ✅ Historial completo con búsqueda
+- ✅ Exportación de datos (próximamente)
+
+### 🎯 Metas de Ahorro
+- ✅ Creación de metas personalizadas con objetivos
+- ✅ Seguimiento de progreso en tiempo real
+- ✅ Proyecciones inteligentes de cumplimiento
+- ✅ Estados visuales (adelantado/en tiempo/atrasado)
+- ✅ Aportes manuales o automáticos
+
+### 📈 Análisis Financiero
+- ✅ Score de salud financiera
+- ✅ Comparativa ingresos vs gastos por período
+- ✅ Desglose por categorías (gráfico de dona)
+- ✅ Tasa de ahorro mensual
+- ✅ Top gastos con detalles
+- ✅ Insights y recomendaciones automáticas
+
+### 🔒 Seguridad y Privacidad
+- ✅ Todos los datos almacenados localmente (LocalStorage)
+- ✅ Sin envío de información a servidores externos
+- ✅ Control total sobre tu información financiera
+
+---
+
+## 🛠 Tecnologías Utilizadas
+
+<table>
+<tr>
+<td align="center" width="150">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="48" height="48" alt="React" />
+<br><strong>React 18</strong>
+<br><sub>Framework UI</sub>
+</td>
+<td align="center" width="150">
+<img src="https://vitejs.dev/logo.svg" width="48" height="48" alt="Vite" />
+<br><strong>Vite 5</strong>
+<br><sub>Build Tool</sub>
+</td>
+<td align="center" width="150">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" width="48" height="48" alt="SASS" />
+<br><strong>SASS</strong>
+<br><sub>Estilos</sub>
+</td>
+<td align="center" width="150">
+<img src="https://www.chartjs.org/media/logo-title.svg" width="48" height="48" alt="Chart.js" />
+<br><strong>Chart.js</strong>
+<br><sub>Gráficos</sub>
+</td>
+</tr>
+<tr>
+<td align="center" width="150">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="48" height="48" alt="JavaScript" />
+<br><strong>JavaScript ES6+</strong>
+<br><sub>Lógica</sub>
+</td>
+<td align="center" width="150">
+<img src="https://reactrouter.com/favicon-light.png" width="48" height="48" alt="React Router" />
+<br><strong>React Router</strong>
+<br><sub>Navegación</sub>
+</td>
+<td align="center" width="150">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="48" height="48" alt="Git" />
+<br><strong>Git</strong>
+<br><sub>Control de versiones</sub>
+</td>
+<td align="center" width="150">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" width="48" height="48" alt="npm" />
+<br><strong>npm</strong>
+<br><sub>Gestión de paquetes</sub>
+</td>
+</tr>
+</table>
+
+---
+
+## 🎨 Prototipo en Figma
+
+El diseño completo de MoneyTrack fue desarrollado en Figma, siguiendo principios de **diseño centrado en el usuario** y mejores prácticas de **UI/UX**.
+
+### 📐 Wireframes y Diseño
+
+El prototipo incluye:
+
+#### 🏠 **Dashboard Principal**
+![Dashboard Preview](./docs/images/dashboard-preview.png)
+- Resumen financiero con tarjetas de balance, ingresos y gastos
+- Vista rápida de cuentas bancarias
+- Progreso de metas de ahorro
+- Transacciones recientes
+- Gráfico histórico de tendencias
+
+#### 💳 **Gestión de Cuentas**
+![Accounts Preview](./docs/images/accounts-preview.png)
+- Lista de cuentas activas e inactivas
+- Tarjetas con información detallada
+- Botones de acción rápida
+- Filtros por tipo de cuenta
+
+#### 🎯 **Metas de Ahorro**
+![Goals Preview](./docs/images/goals-preview.png)
+- Creación y seguimiento de metas
+- Barras de progreso visuales
+- Estados con colores semafóricos
+- Proyecciones de cumplimiento
+
+#### 💸 **Transacciones**
+![Transactions Preview](./docs/images/transactions-preview.png)
+- Lista cronológica de movimientos
+- Filtros avanzados
+- Categorización automática
+- Resumen de ingresos y gastos
+
+#### 📊 **Análisis Financiero**
+![Analytics Preview](./docs/images/analytics-preview.png)
+- Score de salud financiera
+- Gráficos comparativos
+- Desglose por categorías
+- Insights inteligentes
+
+
+## 📁 Estructura del Proyecto
+
 ```
 MONEYTRACK/
 │── dist/                    
@@ -37,32 +178,19 @@ MONEYTRACK/
 │── README.md                
 │── package.json             
 │── vite.config.js            
+
 ```
 
-## Requisitos de Evaluación
-- **(20%) Prototipo Figma:**  
-  La aplicación refleja lo planteado en el prototipo de Figma (actualiza el archivo de Figma según las modificaciones realizadas).  
-  [Enlace al prototipo en Figma](https://www.figma.com/design/sHIYQZ0UkW3tj963tbr9D7/MoneyTrack?node-id=0-1&t=SFJ1Dn56QnZLDxA0-1)
+---
 
-- **(30%) Funcionalidad y Bundle Final:**  
-  La aplicación funciona correctamente, está completa y todo el contenido está incrustado en el bundle final que se usará para crear el instalador.
+## 🚀 Instalación
 
-- **(10%) Uso de Repositorio:**  
-  Se evidencia el uso del repositorio con un mínimo de 40 commits, con al menos 10 commits por integrante, y se usa correctamente el archivo `.gitignore` y el `README.md` con las instrucciones de ejecución del proyecto.
+### Prerrequisitos
 
-- **(10%) Offline:**  
-  La aplicación no requiere conexión a Internet para funcionar.
+- **Node.js** >= 16.x
+- **npm** >= 8.x o **yarn** >= 1.22.x
 
-- **(10%) Uso de SASS:**  
-  La estructura base del proyecto evidencia el uso de SASS y clases parciales.
-
-- **(10%) Bundler:**  
-  Se utiliza correctamente Vite para automatizar la minificación de archivos SASS, integración y optimización del código JavaScript.
-
-- **(10%) Asistencia y Puntualidad:**  
-  Se registra la asistencia a clases y la entrega puntual del proyecto.
-
-## Instalación
+### Pasos de Instalación
 
 1. **Clonar el repositorio:**
 
@@ -71,43 +199,91 @@ MONEYTRACK/
    cd MoneyTrack
    ```
 
-2. **Instalar Dependencias:**
+2. **Instalar dependencias:**
 
    ```bash
    npm install
    ```
 
-   Asegúrate de tener instaladas las siguientes dependencias:
-   - **SASS** (para compilar los archivos .scss)
-   - **Chart.js** (para los gráficos)
-   - **react-number-format** (para el formateo de números)
-   Si no están incluidas en tu `package.json`, puedes instalarlas ejecutando:
+   O con yarn:
 
    ```bash
-   npm install sass chart.js react-number-format
+   yarn install
    ```
 
-3. **Ejecutar en Modo Desarrollo:**
+3. **Verificar instalación de dependencias clave:**
 
    ```bash
-   npm run dev
+   npm list sass chart.js react-number-format
    ```
 
-4. **Construir para Producción:**
+   Si alguna falta, instalarla:
 
    ```bash
-   npm run build
+   npm install sass chart.js react-number-format react-router-dom
    ```
 
-## Uso
-- Navega por la aplicación para registrar transacciones, gestionar cuentas y visualizar gráficos interactivos.
-- Consulta la documentación interna del proyecto para más detalles sobre la estructura y las funciones implementadas.
+### Scripts Disponibles
 
-## Colaboración
+| Comando | Descripción |
+|---------|-------------|
+| `npm run dev` | Inicia servidor de desarrollo en http://localhost:5173 |
+| `npm run build` | Genera build de producción en `/dist` |
+| `npm run preview` | Previsualiza build de producción |
+| `npm run lint` | Ejecuta linter de código |
 
-- **Shaddai Caballero**
-- **Oscar Andres Castaño**
-- **El ministro**
+---
 
-Cada integrante ha contribuido con un mínimo de 10 commits, siguiendo buenas prácticas de control de versiones.
+## 💻 Uso
 
+### 1. Modo Desarrollo
+
+```bash
+npm run dev
+```
+
+Abre tu navegador en `http://localhost:5173`
+
+### 2. Crear Build de Producción
+
+```bash
+npm run build
+```
+
+Los archivos optimizados se generarán en la carpeta `/dist`
+
+### 3. Previsualizar Build
+
+```bash
+npm run preview
+```
+
+---
+
+## 👥 Equipo
+
+<table>
+<tr>
+<td align="center">
+<img src="https://github.com/shaddai.png" width="100px;" alt="Shaddai Caballero"/><br />
+<sub><b>Shaddai Caballero</b></sub><br />
+<sub>Frontend Developer</sub><br />
+<a href="https://github.com/shaddai">GitHub</a>
+</td>
+<td align="center">
+<img src="https://github.com/oscar.png" width="100px;" alt="Oscar Castaño"/><br />
+<sub><b>Oscar Andrés Castaño</b></sub><br />
+<sub>UI/UX Designer</sub><br />
+<a href="https://github.com/oscar">GitHub</a>
+</td>
+<td align="center">
+<img src="https://github.com/ministro.png" width="100px;" alt="El Ministro"/><br />
+<sub><b>El Ministro</b></sub><br />
+<sub>Backend Logic</sub><br />
+<a href="https://github.com/ministro">GitHub</a>
+</td>
+</tr>
+</table>
+
+
+</div>
