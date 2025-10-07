@@ -29,11 +29,20 @@ const CrearTransaccion = () => {
         let transacciones = JSON.parse(localStorage.getItem("transacciones")) || {};
         if (!transacciones[mesNombre]) transacciones[mesNombre] = [];
 
-        transacciones[mes].push({ titulo: titulo.trim(), monto: montoNumerico, tipo, cuenta, fecha });
+        transacciones[mesNombre].push({ 
+            titulo: titulo.trim(), 
+            monto: montoNumerico, 
+            tipo, 
+            cuenta, 
+            fecha 
+        });
         localStorage.setItem("transacciones", JSON.stringify(transacciones));
 
-        // Emitir evento de actualización
+        // ✅ NUEVO - Emitir eventos de actualización
         window.dispatchEvent(new Event('transaccionesChanged'));
+        window.dispatchEvent(new Event('storage'));
+        
+        console.log("✅ Transacción guardada y eventos emitidos");
 
         // Navegar de vuelta a la página anterior
         navigate(-1);
