@@ -2,8 +2,8 @@
 $bg-color: #f0f0f0;
 $text-color: #333;
 $shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-$icon-size: 24px;
-$font-size: 12px;
+$icon-size: 20px;
+$font-size: 11px;
 
 // Variables para el botón flotante
 // Definimos el color base y en el estado normal usaremos una versión semitransparente
@@ -13,10 +13,10 @@ $floating-trans: rgba(142,70,229,0.7); // versión semitransparente
 // Botón flotante
 .floating-button {
   position: fixed;
-  bottom: 80px;
+  bottom: 65px;
   right: 20px;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   background-color: $floating-trans !important;  // fondo semitransparente
   border: 2px solid #ccc;
   border-radius: 10px;
@@ -47,7 +47,7 @@ $floating-trans: rgba(142,70,229,0.7); // versión semitransparente
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 10px 0;
+  padding: 6px 0;
   box-shadow: $shadow;
 }
 
@@ -64,6 +64,6 @@ $floating-trans: rgba(142,70,229,0.7); // versión semitransparente
   img {
     width: $icon-size;
     height: $icon-size;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
   }
 }

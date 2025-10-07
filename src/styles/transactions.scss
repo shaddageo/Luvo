@@ -130,18 +130,23 @@ $box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
 
   strong {
     display: block;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
+    font-size: 15px;
   }
 
   small {
     color: #777;
+    font-size: 13px;
+    display: block;
   }
 }
 
 // Monto de la transacción
 .transaction-amount {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
+  min-width: 90px;
+  text-align: right;
 
   &.ingreso {
     color: #4CAF50;

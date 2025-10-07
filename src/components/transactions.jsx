@@ -21,8 +21,9 @@ const Transactions = () => {
     console.log("loadTransactions() - Mes seleccionado:", selectedMonth);
     console.log("loadTransactions() - Filtro de tipo:", filterType);
 
-    // Obtener las transacciones del mes
-    let transaccionesMes = obtenerTransacciones(selectedMonth);
+    const transaccionesStorage = JSON.parse(localStorage.getItem("transacciones")) || {};
+    const mesActual = new Date().toLocaleString('es-ES', { month: 'long' }).toLowerCase();
+    let transaccionesMes = transaccionesStorage[mesActual] || [];
     console.log("Transacciones obtenidas para el mes:", transaccionesMes);
 
     if (!Array.isArray(transaccionesMes)) {
@@ -118,13 +119,13 @@ const Transactions = () => {
 
         <div id="listaTransacciones">
           {transactions.length > 0 ? (
-            transactions.map(({ titulo, cuenta, tipo, monto }, index) => (
+            transactions.map(({ titulo, cuenta, tipo, monto, fecha }, index) => (
               <div key={index} className="transaction">
                 <div className="transaction-info">
                   <strong>{titulo}</strong>
                   <br />
                   <small>
-                    {cuenta} - {tipo}
+                    {cuenta} - {new Date(fecha).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}
                   </small>
                 </div>
                 <div

@@ -25,14 +25,18 @@ const CrearTransaccion = () => {
             return alert("Todos los campos son obligatorios y el monto debe ser válido.");
         }
 
-        const mes = new Date(fecha).toLocaleString("es-ES", { month: "long" }).toLowerCase();
+        const mesNombre = new Date(fecha).toLocaleString('es-ES', { month: 'long' }).toLowerCase();
         let transacciones = JSON.parse(localStorage.getItem("transacciones")) || {};
-        if (!transacciones[mes]) transacciones[mes] = [];
+        if (!transacciones[mesNombre]) transacciones[mesNombre] = [];
 
         transacciones[mes].push({ titulo: titulo.trim(), monto: montoNumerico, tipo, cuenta, fecha });
         localStorage.setItem("transacciones", JSON.stringify(transacciones));
 
-        navigate("/transactions");
+        // Emitir evento de actualización
+        window.dispatchEvent(new Event('transaccionesChanged'));
+
+        // Navegar de vuelta a la página anterior
+        navigate(-1);
     };
 
     return (

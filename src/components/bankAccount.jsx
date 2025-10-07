@@ -67,10 +67,11 @@ const BankAccount = () => {
 
       <div id="listaTransacciones">
         {transactions.length > 0 ? (
-          transactions.map(({ titulo, monto, tipo }, index) => (
+          transactions.map(({ titulo, monto, tipo, fecha }, index) => (
             <div key={index} className="transaction">
               <div className="transaction-info">
                 <strong>{titulo}</strong>
+                <small>{new Date(fecha).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}</small>
               </div>
               <div
                 className="transaction-amount"
