@@ -1,0 +1,65 @@
+// VARIABLES
+$primary-color: #8E46E5;
+$text-color: #333;
+$bg-color: #f0f0f0;
+$box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+
+// CONTENEDOR PRINCIPAL
+.mas-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: flex-start; 
+  min-height: 100vh; 
+}
+
+// TÍTULO
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: $text-color;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+// CONTENEDOR DE OPCIONES
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 70%;
+
+  .option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: 8px;
+    background: #f5f5f5;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    box-shadow: $box-shadow;
+    
+    img {
+      width: 24px;
+      height: 24px;
+    }
+    
+    span {
+      font-size: 16px;
+      font-weight: bold;
+      color: $text-color;
+    }
+    
+    &:hover {
+      background: #e0e0e0;
+    }
+  }
+}
+
+/* Nueva regla para el input de correo en AccountConfig */
+#email-input {
+  width: 250px; /* Ajusta el ancho según sea necesario */
+}
