@@ -1,13 +1,23 @@
-# 💰 MoneyTrack
-
 <div align="center">
 
-**Tu Asistente Financiero Personal**
+<img src="https://github.com/shaddageo/MoneyTrackAM/blob/main/assets/logo.png" alt="MoneyTrack Logo" width="200" height="200" />
 
-[![React](https://img.shields.io/badge/React-18.x-blue?logo=react)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?logo=vite)](https://vitejs.dev/)
-[![SASS](https://img.shields.io/badge/SASS-1.x-CC6699?logo=sass)](https://sass-lang.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+# 💰 MoneyTrack
+
+### Tu Asistente Financiero Personal
+
+<p>
+  <em>Gestiona tus finanzas de manera inteligente, sencilla y sin conexión a internet</em>
+</p>
+
+<br />
+
+[![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![SASS](https://img.shields.io/badge/SASS-1.x-CC6699?style=for-the-badge&logo=sass&logoColor=white)](https://sass-lang.com/)
+[![License](https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge)](LICENSE)
+
+---
 
 </div>
 
