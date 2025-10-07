@@ -1,4 +1,4 @@
-package com.moneytrackupb.app;
+package com.luvo.app;
 
 import com.getcapacitor.BridgeActivity;
 

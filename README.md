@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://github.com/shaddageo/MoneyTrackAM/blob/main/assets/logo.png" alt="MoneyTrack Logo" width="200" height="200" />
+<img src="https://github.com/shaddageo/Luvo/blob/main/assets/logo.png" alt="Luvo Logo" width="200" height="200" />
 
 ### Tu Asistente Financiero Personal
 
@@ -23,7 +23,7 @@
 
 ## 🎯 Acerca del Proyecto
 
-Luvo es una **aplicación web progresiva (PWA)** diseñada para ayudar a los usuarios a **registrar y gestionar sus finanzas personales** de manera sencilla, intuitiva y accesible. Con un enfoque en la experiencia del usuario y la funcionalidad offline, MoneyTrack permite mejorar la salud financiera mediante visualizaciones interactivas y un control detallado de ingresos, gastos y metas de ahorro.
+Luvo es una **aplicación web progresiva (PWA)** diseñada para ayudar a los usuarios a **registrar y gestionar sus finanzas personales** de manera sencilla, intuitiva y accesible. Con un enfoque en la experiencia del usuario y la funcionalidad offline, Luvo permite mejorar la salud financiera mediante visualizaciones interactivas y un control detallado de ingresos, gastos y metas de ahorro.
 
 ### 🌟 ¿Por qué Luvo?
 
@@ -125,7 +125,7 @@ Luvo es una **aplicación web progresiva (PWA)** diseñada para ayudar a los usu
 
 ## 🎨 Prototipo en Figma
 
-El diseño completo de MoneyTrack fue desarrollado en Figma, siguiendo principios de **diseño centrado en el usuario** y mejores prácticas de **UI/UX**.
+El diseño completo de Luvo fue desarrollado en Figma, siguiendo principios de **diseño centrado en el usuario** y mejores prácticas de **UI/UX**.
 <img width="1694" height="1006" alt="image" src="https://github.com/user-attachments/assets/6112cfca-5003-43eb-af4f-909360b97922" />
 
 
@@ -168,7 +168,7 @@ El prototipo incluye:
 ## 📁 Estructura del Proyecto
 
 ```
-MONEYTRACK/
+Luvo/
 │── dist/                    
 │── node_modules/             
 │── public/                   
@@ -200,8 +200,8 @@ MONEYTRACK/
 1. **Clonar el repositorio:**
 
    ```bash
-   git clone https://github.com/tuUsuario/MoneyTrack.git
-   cd MoneyTrack
+   git clone https://github.com/tuUsuario/Luvo.git
+   cd Luvo
    ```
 
 2. **Instalar dependencias:**

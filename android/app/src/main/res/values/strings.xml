@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">MoneyTrack</string>
-    <string name="title_activity_main">MoneyTrack</string>
-    <string name="package_name">com.moneytrackupb.app</string>
-    <string name="custom_url_scheme">com.moneytrackupb.app</string>
+    <string name="app_name">Luvo</string>
+    <string name="title_activity_main">Luvo</string>
+    <string name="package_name">com.luvo.app</string>
+    <string name="custom_url_scheme">com.luvo.app</string>
 </resources>
