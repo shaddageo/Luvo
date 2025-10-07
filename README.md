@@ -118,13 +118,14 @@ MoneyTrack es una **aplicación web progresiva (PWA)** diseñada para ayudar a l
 ## 🎨 Prototipo en Figma
 
 El diseño completo de MoneyTrack fue desarrollado en Figma, siguiendo principios de **diseño centrado en el usuario** y mejores prácticas de **UI/UX**.
+<img width="1694" height="1006" alt="image" src="https://github.com/user-attachments/assets/6112cfca-5003-43eb-af4f-909360b97922" />
+
 
 ### 📐 Wireframes y Diseño
 
 El prototipo incluye:
 
 #### 🏠 **Dashboard Principal**
-![Dashboard Preview](./docs/images/dashboard-preview.png)
 - Resumen financiero con tarjetas de balance, ingresos y gastos
 - Vista rápida de cuentas bancarias
 - Progreso de metas de ahorro
@@ -132,28 +133,24 @@ El prototipo incluye:
 - Gráfico histórico de tendencias
 
 #### 💳 **Gestión de Cuentas**
-![Accounts Preview](./docs/images/accounts-preview.png)
 - Lista de cuentas activas e inactivas
 - Tarjetas con información detallada
 - Botones de acción rápida
 - Filtros por tipo de cuenta
 
 #### 🎯 **Metas de Ahorro**
-![Goals Preview](./docs/images/goals-preview.png)
 - Creación y seguimiento de metas
 - Barras de progreso visuales
 - Estados con colores semafóricos
 - Proyecciones de cumplimiento
 
 #### 💸 **Transacciones**
-![Transactions Preview](./docs/images/transactions-preview.png)
 - Lista cronológica de movimientos
 - Filtros avanzados
 - Categorización automática
 - Resumen de ingresos y gastos
 
 #### 📊 **Análisis Financiero**
-![Analytics Preview](./docs/images/analytics-preview.png)
 - Score de salud financiera
 - Gráficos comparativos
 - Desglose por categorías
@@ -262,28 +259,9 @@ npm run preview
 
 ## 👥 Equipo
 
-<table>
-<tr>
-<td align="center">
-<img src="https://github.com/shaddai.png" width="100px;" alt="Shaddai Caballero"/><br />
-<sub><b>Shaddai Caballero</b></sub><br />
-<sub>Frontend Developer</sub><br />
-<a href="https://github.com/shaddai">GitHub</a>
-</td>
-<td align="center">
-<img src="https://github.com/oscar.png" width="100px;" alt="Oscar Castaño"/><br />
-<sub><b>Oscar Andrés Castaño</b></sub><br />
-<sub>UI/UX Designer</sub><br />
-<a href="https://github.com/oscar">GitHub</a>
-</td>
-<td align="center">
-<img src="https://github.com/ministro.png" width="100px;" alt="El Ministro"/><br />
-<sub><b>El Ministro</b></sub><br />
-<sub>Backend Logic</sub><br />
-<a href="https://github.com/ministro">GitHub</a>
-</td>
-</tr>
-</table>
+- Oscar Andrés Castaño Estrada
+- Shaddai Caballero
+- Andrés Arias Medina
 
 
 </div>
