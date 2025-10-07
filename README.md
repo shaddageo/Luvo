@@ -105,8 +105,9 @@ MONEYTRACK/
 
 ## Colaboración
 
-- **Camilo Andrés Guzmán**
-- **Mkclaren Tobar Vélez**
+- **Shaddai Caballero**
+- **Oscar Andres Castaño**
+- **El ministro**
 
 Cada integrante ha contribuido con un mínimo de 10 commits, siguiendo buenas prácticas de control de versiones.
 
