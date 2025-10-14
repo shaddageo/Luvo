@@ -1,0 +1,119 @@
+$form-max-width: 420px;
+$text-color: #222;
+$border-color: #ccc;
+
+// === CONTENEDOR PRINCIPAL ===
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  position: relative; // para ubicar correctamente la flecha dentro del contenedor
+}
+
+// === FLECHA DE DEVOLVER ===
+.back-arrow {
+  position: absolute;
+  top: 1.8rem;
+  left: 1rem;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  text-decoration: none;
+  z-index: 2; // asegura que esté sobre el fondo pero sin tapar el texto
+}
+
+// === TÍTULO ===
+.title {
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  font-weight: 700;
+  color: $text-color;
+  text-align: center;
+  margin: 0;
+  line-height: 1.3;
+  white-space: normal;
+  overflow-wrap: break-word;
+  width: 100%;
+  padding-left: 2.5rem; // deja espacio para la flecha en pantallas grandes
+}
+
+// === FORMULARIO ===
+.register-form {
+  width: 100%;
+  max-width: $form-max-width;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  box-sizing: border-box;
+  margin-top: 2rem;
+}
+
+// === INPUTS ===
+.input-group {
+  width: 100%;
+  margin-bottom: 1.5rem;
+
+  .input-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: $text-color;
+    font-size: 0.95rem;
+  }
+
+  .input-line {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid $border-color;
+    padding: 0.4rem 0;
+
+    .input-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    input {
+      border: none;
+      outline: none;
+      flex: 1;
+      font-size: 1rem;
+      color: $text-color;
+      background: transparent;
+      min-width: 0;
+    }
+
+    input:disabled {
+      color: #666;
+    }
+  }
+}
+
+// === RESPONSIVE ===
+@media (max-width: 480px) {
+  .form-container {
+    padding: 1.2rem 0.8rem;
+  }
+
+  .back-arrow {
+    top: 1.4rem;
+    left: 0.6rem;
+    width: 20px;
+    height: 20px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+    padding-left: 2rem; // mantiene el espacio suficiente para la flecha
+  }
+
+  .register-form {
+    margin-top: 1.5rem;
+  }
+}

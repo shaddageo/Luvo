@@ -143,6 +143,8 @@ $link-color: #007AFF;
   right: 0;
   bottom: 0;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain; // Previene el scroll del navegador
+  touch-action: pan-y;
   background-color: #fff;
   padding: var(--page-padding);
   padding-bottom: calc(80px + env(safe-area-inset-bottom));

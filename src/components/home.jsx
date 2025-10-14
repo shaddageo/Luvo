@@ -27,11 +27,13 @@ const Home = () => {
   // Carga las cuentas y transacciones desde localStorage y actualiza los estados
   const loadAccounts = useCallback(() => {
     console.log("Ejecutando loadAccounts...");
-    const cuentas = obtenerCuentas() || [];
-    console.log("Cuentas obtenidas:", cuentas);
+    try {
+      const cuentasStorage = localStorage.getItem("cuentas");
+      const cuentas = cuentasStorage ? JSON.parse(cuentasStorage) : [];
+      console.log("Cuentas obtenidas:", cuentas);
 
-    const transaccionesStorage =
-      JSON.parse(localStorage.getItem("transacciones")) || {};
+      const transaccionesStorage =
+        JSON.parse(localStorage.getItem("transacciones")) || {};
     console.log("Transacciones obtenidas:", transaccionesStorage);
 
     // Actualizar transacciones recientes
@@ -77,8 +79,14 @@ const Home = () => {
       (sum, cuenta) => sum + (cuenta.saldo || 0),
       0
     );
-    console.log("Total Balance Calculado:", totalBalanceCalculado);
-    setTotalBalance(totalBalanceCalculado);
+      console.log("Total Balance Calculado:", totalBalanceCalculado);
+      setTotalBalance(totalBalanceCalculado);
+    } catch (error) {
+      console.error("Error al cargar las cuentas:", error);
+      setAccounts([]);
+      setTotalBalance(0);
+      setRecentTransactions([]);
+    }
   }, []);
 
   // Configura el saludo del usuario y carga las cuentas al montar el componente
@@ -106,20 +114,18 @@ const Home = () => {
     // Esta función manejará cualquier cambio en las transacciones
     const handleTransactionChange = () => {
       console.log("Cambio en transacciones detectado");
-      requestAnimationFrame(() => {
-        loadAccounts();
-      });
+      loadAccounts();
     };
 
     window.addEventListener("cuentasChanged", handleDataChange);
     window.addEventListener("transaccionesChanged", handleTransactionChange);
 
-    // Forzar una actualización inicial
-    handleTransactionChange();
+    // Cargar datos iniciales
+    loadAccounts();
 
     return () => {
-      window.addEventListener("cuentasChanged", handleDataChange);
-      window.addEventListener("transaccionesChanged", handleTransactionChange);
+      window.removeEventListener("cuentasChanged", handleDataChange);
+      window.removeEventListener("transaccionesChanged", handleTransactionChange);
     };
   }, [loadAccounts]);
 

@@ -5,7 +5,7 @@ import Register from "./components/register";
 import ForgotPassword from "./components/forgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import Home from "./components/home";
-import Transactions from "./components/Transactions";
+import Transactions from "./components/transactions";
 import Account from "./components/account";
 import AccountConfig from "./components/accountConfig";
 import CreateAccount from "./components/createBankAccount";

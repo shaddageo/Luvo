@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../utils/auth";
-
+import "../styles/accountConfig.scss";
 // Importar imágenes correctamente
 import userIcon from "../assets/user.svg";
 import mailIcon from "../assets/mail.svg";
