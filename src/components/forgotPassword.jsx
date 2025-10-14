@@ -29,20 +29,25 @@ function ForgotPassword() {
     }
   };
 
-  const handleAnswerSubmit = (e) => {
-    e.preventDefault();
-    if (validateSecurityAnswer(username, answer)) {
-      setModalMessage("Respuesta correcta.");
-      setIsModalOpen(true);
-      setTimeout(() => {
-        setIsModalOpen(false);
-        navigate("/resetpassword");
-      }, 1000);
-    } else {
-      setModalMessage("Respuesta incorrecta. Inténtalo de nuevo.");
-      setIsModalOpen(true);
-    }
-  };
+const handleAnswerSubmit = (e) => {
+  e.preventDefault();
+  if (validateSecurityAnswer(username, answer)) {
+    setModalMessage("Respuesta correcta.");
+    setIsModalOpen(true);
+
+    // Guardar el usuario que va a restablecer su contraseña
+    localStorage.setItem("resetUser", username);
+
+    setTimeout(() => {
+      setIsModalOpen(false);
+      navigate("/resetpassword");
+    }, 1000);
+  } else {
+    setModalMessage("Respuesta incorrecta. Inténtalo de nuevo.");
+    setIsModalOpen(true);
+  }
+};
+
   
   return (
     <div className="form-container">

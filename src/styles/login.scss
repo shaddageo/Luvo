@@ -14,40 +14,64 @@ html, body {
   font-family: Arial, sans-serif;
 }
 
-// Contenedor principal
-.form-container {
+  // Contenedor principal
+.login-page{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #7b5b5b;
+
+  .form-container {
+  background-color: $bg-color;
   display: flex;
   flex-direction: column;
   justify-content: center; // Centrado vertical
   align-items: center; // Centrado horizontal
-  height: 100vh; // Usa toda la altura visible
+  height: 100vh;
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 60px;
   box-sizing: border-box;
-  overflow: hidden; // Evita scroll
+  overflow: hidden;
 
-  // Logo centrado
-  .container-logo {
+  // Logo centrado y proporcional (coincide con tu JSX: .logo-container > img)
+  .logo-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 40px; // Da espacio entre logo y formulario
+    margin-bottom: 0px; // separa logo del formulario
     width: 100%;
 
-    .logo-container {
-      width: 70%; // Ajusta el tamaño base
-      max-width: 160px;
+    img {
+      width: 100%;        // ajústalo a 30% / 35% / 45% según prefieras
+      max-width: 250px;  // límite en px
       height: auto;
-      object-fit: contain;
-    }
-
-    svg, img {
-      width: 100% !important;
-      height: auto !important;
+      display: block;
+      margin: 0 auto;
     }
   }
+
+  // Aplica correctamente a cualquier tipo de logo (SVG o PNG) - redundante pero seguro
+  svg,
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+}
+
+  // Contenido del formulario (inputs y botones)
+  .form-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
 
   // Sección del formulario (inputs y botones)
   .form-section {
@@ -135,7 +159,7 @@ html, body {
       }
     }
   }
-}
+
 
 // Ajustes responsive
 @media only screen and (max-width: 430px) {

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { updatePassword } from "../utils/auth";
 import "../styles/forgotPassword.scss";
 import "../styles/modal.scss";
-import lockIcon from "../assets/lock.svg"; // Importación correcta
+import lockIcon from "../assets/lock.svg";
 
 function ResetPassword() {
   const [password, setPassword] = useState("");
@@ -19,7 +19,7 @@ function ResetPassword() {
     }
   }, [username, navigate]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password.length < 8) {
@@ -36,18 +36,33 @@ function ResetPassword() {
       return;
     }
 
-    const result = updatePassword(username, password);
+    try {
+      const result = await Promise.resolve(updatePassword(username, password));
 
-    setModalMessage(result.success ? "Contraseña restablecida con éxito." : result.message);
-    setIsModalOpen(true);
+      setModalMessage(
+        result.success
+          ? "Contraseña restablecida con éxito. Serás redirigido al login."
+          : result.message || "Error al restablecer contraseña."
+      );
+      setIsModalOpen(true);
 
-    setTimeout(() => {
-      setIsModalOpen(false);
       if (result.success) {
         localStorage.removeItem("resetUser");
-        navigate("/login");
+
+        // 🔥 Esperamos 2.5 segundos y luego redirigimos
+        setTimeout(() => {
+          navigate("/login", { replace: true });
+        }, 2500);
+      } else {
+        // Si falla, cerramos modal luego de 2.5 s
+        setTimeout(() => setIsModalOpen(false), 2500);
       }
-    }, result.success ? 3000 : 2500);
+    } catch (err) {
+      console.error("updatePassword error:", err);
+      setModalMessage("Ocurrió un error inesperado.");
+      setIsModalOpen(true);
+      setTimeout(() => setIsModalOpen(false), 2500);
+    }
   };
 
   return (
@@ -85,7 +100,9 @@ function ResetPassword() {
         </div>
 
         <div className="button-group">
-          <button type="submit" className="btn btn-primary">Restablecer</button>
+          <button type="submit" className="btn btn-primary">
+            Restablecer
+          </button>
         </div>
       </form>
 
