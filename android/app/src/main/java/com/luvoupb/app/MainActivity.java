@@ -1,4 +1,4 @@
-package com.luvo.app;
+package com.luvoupb.app;
 
 import com.getcapacitor.BridgeActivity;
 

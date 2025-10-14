@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">Luvo</string>
     <string name="title_activity_main">Luvo</string>
-    <string name="package_name">com.luvo.app</string>
-    <string name="custom_url_scheme">com.luvo.app</string>
+    <string name="package_name">com.luvoupb.app</string>
+    <string name="custom_url_scheme">com.luvoupb.app</string>
 </resources>
