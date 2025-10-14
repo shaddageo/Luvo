@@ -20,6 +20,7 @@ dist-ssr/
 .vite/
 .out/
 build/
+/android/
 
 # Archivos de configuración específicos de herramientas
 .vscode/
