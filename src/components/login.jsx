@@ -11,18 +11,50 @@ import keyIcon from '../assets/key.svg';
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(''); // texto del error para la modal
+  const [error, setError] = useState('');
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!username.trim()) {
+      newErrors.username = 'El usuario es obligatorio';
+    }
+
+    if (!password.trim()) {
+      newErrors.password = 'La contraseña es obligatoria';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleLogin = async () => {
-    // soporta login síncrono o asíncrono
+    if (!validateForm()) {
+      return;
+    }
+
     const result = await Promise.resolve(login(username, password));
 
     if (result && result.success) {
       navigate('/home');
     } else {
-      // mensaje por defecto si no viene result.message
       setError(result?.message || 'Contraseña incorrecta');
+    }
+  };
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+    if (errors.username) {
+      setErrors({ ...errors, username: '' });
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    if (errors.password) {
+      setErrors({ ...errors, password: '' });
     }
   };
 
@@ -36,28 +68,30 @@ function Login() {
         <div className="form-content">
           {/* Input de usuario */}
           <div className="input-group">
-            <div className="input-line">
+            <div className={`input-line ${errors.username ? 'error' : ''}`}>
               <img src={userIcon} alt="User Icon" className="input-icon" />
               <input
                 type="text"
                 placeholder="Usuario"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={handleUsernameChange}
               />
             </div>
+            {errors.username && <span className="error-message">{errors.username}</span>}
           </div>
 
           {/* Input de contraseña */}
           <div className="input-group">
-            <div className="input-line">
+            <div className={`input-line ${errors.password ? 'error' : ''}`}>
               <img src={keyIcon} alt="Key Icon" className="input-icon" />
               <input
                 type="password"
                 placeholder="Contraseña"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handlePasswordChange}
               />
             </div>
+            {errors.password && <span className="error-message">{errors.password}</span>}
             <span
               className="forgot-password"
               onClick={() => navigate('/ForgotPassword')}
@@ -86,7 +120,7 @@ function Login() {
         </div>
       </div>
 
-      {/* Modal de error — se muestra cuando `error` tiene texto */}
+      {/* Modal de error */}
       {error && (
         <div className="modal" role="dialog" aria-modal="true">
           <div className="modal-content">

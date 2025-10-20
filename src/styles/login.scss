@@ -185,3 +185,19 @@ html, body {
     font-size: 15px;
   }
 }
+// Estilos de validación
+.input-line.error {
+  border-bottom-color: #ff3b30 !important;
+}
+
+.error-message {
+  display: block;
+  color: #ff3b30;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-left: 34px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
