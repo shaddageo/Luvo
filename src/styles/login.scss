@@ -201,3 +201,26 @@ html, body {
 .input-group {
   margin-bottom: 20px;
 }
+
+.btn:disabled,
+button:disabled {
+  background-color: #cccccc !important;
+  color: #666666 !important;
+  cursor: not-allowed !important;
+  opacity: 0.6;
+  
+  &:hover {
+    transform: none !important;
+    background-color: #cccccc !important;
+  }
+}
+
+.btn-primary:disabled {
+  background-color: #cccccc !important;
+  color: #666666 !important;
+}
+
+.btn-secondary:disabled {
+  background-color: #e0e0e0 !important;
+  color: #999999 !important;
+}

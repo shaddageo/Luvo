@@ -16,6 +16,15 @@ const CrearCuentaBancaria = () => {
   const [toastType, setToastType] = useState("success");
   const [showToast, setShowToast] = useState(false);
 
+  const isFormValid = () => {
+    return (
+      nombreCuenta.trim() !== '' &&
+      saldoInicial !== undefined &&
+      saldoInicial >= 0 &&
+      tipoCuenta !== ''
+    );
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("handleSubmit invoked");
@@ -151,7 +160,7 @@ const CrearCuentaBancaria = () => {
           </div>
         </div>
 
-        <button type="submit">Crear Cuenta</button>
+        <button type="submit" disabled={!isFormValid()}>Crear Cuenta</button>
         <button type="button" className="submit-btn" onClick={() => navigate('/home')}>
           Volver
         </button>

@@ -169,3 +169,17 @@ $border-radius: 10px;
     transition: border-color 0.3s ease;
   }
 }
+// Estilos para botones deshabilitados
+.register-form {
+  button:disabled {
+    background-color: #cccccc !important;
+    color: #666666 !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+    
+    &:hover {
+      transform: none !important;
+      background-color: #cccccc !important;
+    }
+  }
+}

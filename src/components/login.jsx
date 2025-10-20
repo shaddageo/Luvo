@@ -30,6 +30,10 @@ function Login() {
     return Object.keys(newErrors).length === 0;
   };
 
+  const isFormValid = () => {
+    return username.trim() !== '' && password.trim() !== '';
+  };
+
   const handleLogin = async () => {
     if (!validateForm()) {
       return;
@@ -106,6 +110,7 @@ function Login() {
               type="button"
               className="btn btn-primary"
               onClick={handleLogin}
+              disabled={!isFormValid()}
             >
               Iniciar Sesión
             </button>

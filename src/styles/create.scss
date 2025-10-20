@@ -193,3 +193,17 @@ $bg-color: #d2d1d140;
     text-align: left;
   }
 }
+// Estilos para botones deshabilitados
+.account-form {
+  button:disabled {
+    background-color: #cccccc !important;
+    color: #666666 !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+    
+    &:hover {
+      transform: none !important;
+      background-color: #cccccc !important;
+    }
+  }
+}
