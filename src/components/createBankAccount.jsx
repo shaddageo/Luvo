@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { agregarCuenta } from "../utils/createAccount";
 import { NumericFormat } from "react-number-format";
+import Toast from "./Toast";
 import "../styles/create.scss";
 import "../styles/modal.scss";
 
@@ -11,28 +12,9 @@ const CrearCuentaBancaria = () => {
   const [saldoInicial, setSaldoInicial] = useState();
   const [tipoCuenta, setTipoCuenta] = useState("");
   const [colorCuenta, setColorCuenta] = useState("#9B02F4");
-  const [modalMessage, setModalMessage] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [errors, setErrors] = useState({});
-
-  const validateForm = () => {
-    const newErrors = {};
-
-    if (!nombreCuenta.trim()) {
-      newErrors.nombreCuenta = 'El nombre de la cuenta es obligatorio';
-    }
-
-    if (saldoInicial === undefined || saldoInicial < 0) {
-      newErrors.saldoInicial = 'Ingresa un saldo válido';
-    }
-
-    if (!tipoCuenta) {
-      newErrors.tipoCuenta = 'Selecciona un tipo de cuenta';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState("success");
+  const [showToast, setShowToast] = useState(false);
 
   const isFormValid = () => {
     return (
@@ -45,8 +27,15 @@ const CrearCuentaBancaria = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("handleSubmit invoked");
+    console.log("Nombre cuenta:", nombreCuenta);
+    console.log("Saldo inicial:", saldoInicial);
+    console.log("Tipo cuenta:", tipoCuenta);
+    console.log("Color cuenta:", colorCuenta);
 
-    if (!validateForm()) {
+    if (!nombreCuenta || saldoInicial === undefined || saldoInicial < 0 || !tipoCuenta) {
+      showToastMessage("Por favor, completa todos los campos correctamente.", "error");
+      console.log("Validation failed: Faltan datos o saldo incorrecto");
       return;
     }
 
@@ -60,25 +49,29 @@ const CrearCuentaBancaria = () => {
     const resultado = agregarCuenta(nuevaCuenta);
 
     if (resultado.error) {
-      showModal(resultado.error);
+      showToastMessage(resultado.error, "error");
+      console.log("Error al agregar cuenta:", resultado.error);
       return;
     }
 
     window.dispatchEvent(new Event('cuentasChanged'));
     window.dispatchEvent(new Event('storage'));
-
-    showModal(resultado.success, true);
+    console.log("✅ Cuenta agregada y eventos emitidos");
+    
+    showToastMessage("Cuenta creada con éxito", "success");
+    
+    // Redirigir después de mostrar el toast
+    setTimeout(() => {
+      navigate("/home");
+      console.log("Redirecting to /home");
+    }, 2000);
   };
 
-  const showModal = (message, redirect = false) => {
-    setModalMessage(message);
-    setIsModalOpen(true);
-    if (redirect) {
-      setTimeout(() => {
-        setIsModalOpen(false);
-        navigate("/home");
-      }, 2000);
-    }
+  const showToastMessage = (message, type = "success") => {
+    setToastMessage(message);
+    setToastType(type);
+    setShowToast(true);
+    console.log("Toast shown with message:", message);
   };
 
   const handleFieldChange = (field, value) => {
@@ -172,14 +165,12 @@ const CrearCuentaBancaria = () => {
           Volver
         </button>
       </form>
-
-      {isModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <p>{modalMessage}</p>
-          </div>
-        </div>
-      )}
+      <Toast 
+        message={toastMessage} 
+        type={toastType}
+        isVisible={showToast} 
+        onClose={() => setShowToast(false)}
+      />
     </div>
   );
 };
