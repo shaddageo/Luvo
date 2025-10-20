@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { agregarCuenta } from "../utils/createAccount";
 import { NumericFormat } from "react-number-format";
+import Toast from "./Toast";
 import "../styles/create.scss";
 import "../styles/modal.scss";
 
@@ -11,8 +12,9 @@ const CrearCuentaBancaria = () => {
   const [saldoInicial, setSaldoInicial] = useState(); // Almacena el valor numérico real
   const [tipoCuenta, setTipoCuenta] = useState("");
   const [colorCuenta, setColorCuenta] = useState("#9B02F4");
-  const [modalMessage, setModalMessage] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState("success");
+  const [showToast, setShowToast] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +25,7 @@ const CrearCuentaBancaria = () => {
     console.log("Color cuenta:", colorCuenta);
 
     if (!nombreCuenta || saldoInicial === undefined || saldoInicial < 0 || !tipoCuenta) {
-      showModal("Por favor, completa todos los campos correctamente.");
+      showToastMessage("Por favor, completa todos los campos correctamente.", "error");
       console.log("Validation failed: Faltan datos o saldo incorrecto");
       return;
     }
@@ -44,7 +46,7 @@ const CrearCuentaBancaria = () => {
     console.log("Cuentas en localStorage:", cuentasGuardadas);
 
     if (resultado.error) {
-      showModal(resultado.error);
+      showToastMessage(resultado.error, "error");
       console.log("Error al agregar cuenta:", resultado.error);
       return;
     }
@@ -54,20 +56,20 @@ const CrearCuentaBancaria = () => {
     window.dispatchEvent(new Event('storage'));
     console.log("✅ Cuenta agregada y eventos emitidos");
     
-    showModal(resultado.success, true);
+    showToastMessage("Cuenta creada con éxito", "success");
+    
+    // Redirigir después de mostrar el toast
+    setTimeout(() => {
+      navigate("/home");
+      console.log("Redirecting to /home");
+    }, 2000);
   };
 
-  const showModal = (message, redirect = false) => {
-    setModalMessage(message);
-    setIsModalOpen(true);
-    console.log("Modal shown with message:", message);
-    if (redirect) {
-      setTimeout(() => {
-        setIsModalOpen(false);
-        navigate("/home");
-        console.log("Redirecting to /home");
-      }, 2000);
-    }
+  const showToastMessage = (message, type = "success") => {
+    setToastMessage(message);
+    setToastType(type);
+    setShowToast(true);
+    console.log("Toast shown with message:", message);
   };
 
   return (
@@ -138,13 +140,12 @@ const CrearCuentaBancaria = () => {
           Volver
         </button>
       </form>
-      {isModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <p>{modalMessage}</p>
-          </div>
-        </div>
-      )}
+      <Toast 
+        message={toastMessage} 
+        type={toastType}
+        isVisible={showToast} 
+        onClose={() => setShowToast(false)}
+      />
     </div>
   );
 };

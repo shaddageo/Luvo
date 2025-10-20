@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import '../styles/savingGoalModal.scss';
 import { NumericFormat } from 'react-number-format';
+import Toast from './Toast';
 
 const SavingGoalModal = ({ isOpen, onClose, onSave, onDelete, initialData }) => {
     const [name, setName] = useState(initialData?.name || '');
@@ -9,6 +10,9 @@ const SavingGoalModal = ({ isOpen, onClose, onSave, onDelete, initialData }) => 
     const [additionalAmount, setAdditionalAmount] = useState('');
     const [targetDate, setTargetDate] = useState(initialData?.targetDate || 'Dic 2025');
     const [isEditing, setIsEditing] = useState(!!initialData);
+    const [toastMessage, setToastMessage] = useState('');
+    const [toastType, setToastType] = useState('success');
+    const [showToast, setShowToast] = useState(false);
 
     const handleAddAmount = () => {
         if (!additionalAmount) return;
@@ -26,6 +30,11 @@ const SavingGoalModal = ({ isOpen, onClose, onSave, onDelete, initialData }) => 
             percentage: Math.min((newCurrentAmount / parseFloat(targetAmount.replace(/\./g, '').replace(',', '.'))) * 100, 100)
         };
         onSave(goal);
+        
+        // Mostrar toast de éxito
+        setToastMessage('Dinero agregado con éxito');
+        setToastType('success');
+        setShowToast(true);
     };
     
     const percentage = targetAmount && currentAmount 
@@ -42,7 +51,17 @@ const SavingGoalModal = ({ isOpen, onClose, onSave, onDelete, initialData }) => 
             percentage
         };
         onSave(goal);
-        onClose();
+        
+        // Mostrar toast de éxito
+        const message = isEditing ? 'Cambios guardados con éxito' : 'Meta creada con éxito';
+        setToastMessage(message);
+        setToastType('success');
+        setShowToast(true);
+        
+        // Cerrar modal después de mostrar el toast
+        setTimeout(() => {
+            onClose();
+        }, 1500);
     };
 
     if (!isOpen) return null;
@@ -182,6 +201,12 @@ const SavingGoalModal = ({ isOpen, onClose, onSave, onDelete, initialData }) => 
                     </div>
                 </form>
             </div>
+            <Toast 
+                message={toastMessage} 
+                type={toastType}
+                isVisible={showToast} 
+                onClose={() => setShowToast(false)}
+            />
         </div>
     );
 };
