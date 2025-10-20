@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NumericFormat } from "react-number-format";
+import Toast from "./Toast";
 import "../styles/create.scss";
 
 const CrearTransaccion = () => {
@@ -12,6 +13,9 @@ const CrearTransaccion = () => {
     const [cuenta, setCuenta] = useState("");
     const [fecha, setFecha] = useState(today); // Se inicializa con la fecha de hoy
     const [cuentas, setCuentas] = useState([]);
+    const [toastMessage, setToastMessage] = useState("");
+    const [toastType, setToastType] = useState("success");
+    const [showToast, setShowToast] = useState(false);
 
     useEffect(() => {
         const cuentasGuardadas = JSON.parse(localStorage.getItem("cuentas")) || [];
@@ -22,7 +26,10 @@ const CrearTransaccion = () => {
         e.preventDefault();
         const montoNumerico = parseFloat(monto);
         if (isNaN(montoNumerico) || !titulo.trim() || !tipo || !cuenta || !fecha) {
-            return alert("Todos los campos son obligatorios y el monto debe ser válido.");
+            setToastMessage("Todos los campos son obligatorios y el monto debe ser válido.");
+            setToastType("error");
+            setShowToast(true);
+            return;
         }
 
         const mesNombre = new Date(fecha).toLocaleString('es-ES', { month: 'long' }).toLowerCase();
@@ -44,8 +51,15 @@ const CrearTransaccion = () => {
         
         console.log("✅ Transacción guardada y eventos emitidos");
 
-        // Navegar de vuelta a la página anterior
-        navigate(-1);
+        // Mostrar toast de éxito
+        setToastMessage("Transacción guardada con éxito");
+        setToastType("success");
+        setShowToast(true);
+
+        // Navegar de vuelta a la página anterior después de mostrar el toast
+        setTimeout(() => {
+            navigate(-1);
+        }, 1500);
     };
 
     return (
@@ -91,6 +105,12 @@ const CrearTransaccion = () => {
                 <button type="submit">Guardar</button>
                 <button type="button" className="submit-btn" onClick={() => navigate('/home')}>Volver</button>
             </form>
+            <Toast 
+                message={toastMessage} 
+                type={toastType}
+                isVisible={showToast} 
+                onClose={() => setShowToast(false)}
+            />
         </div>
     );
 };
