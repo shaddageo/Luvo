@@ -87,6 +87,18 @@ function Register() {
     return Object.keys(newErrors).length === 0;
   };
 
+  const isFormValid = () => {
+    return (
+      username.trim() !== '' &&
+      email.trim() !== '' &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) &&
+      password.trim() !== '' &&
+      password.length >= 8 &&
+      question !== null &&
+      answer.trim() !== ''
+    );
+  };
+
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -203,7 +215,7 @@ function Register() {
           {errors.answer && <span className="error-message">{errors.answer}</span>}
         </div>
 
-        <button type="submit">Registrarme</button>
+        <button type="submit" disabled={!isFormValid()}>Registrarme</button>
       </form>
 
       {isModalOpen && (

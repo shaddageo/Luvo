@@ -34,6 +34,15 @@ const CrearCuentaBancaria = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const isFormValid = () => {
+    return (
+      nombreCuenta.trim() !== '' &&
+      saldoInicial !== undefined &&
+      saldoInicial >= 0 &&
+      tipoCuenta !== ''
+    );
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -158,7 +167,7 @@ const CrearCuentaBancaria = () => {
           </div>
         </div>
 
-        <button type="submit">Crear Cuenta</button>
+        <button type="submit" disabled={!isFormValid()}>Crear Cuenta</button>
         <button type="button" className="submit-btn" onClick={() => navigate('/home')}>
           Volver
         </button>

@@ -3,18 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { getSecurityQuestion, validateSecurityAnswer } from "../utils/auth";
 import "../styles/forgotPassword.scss";
 
-// Importar imágenes correctamente
 import userIcon from "../assets/user.svg";
 import questionIcon from "../assets/question.svg";
 
 function ForgotPassword() {
-  const [step, setStep] = useState(1); // 1: Ingresar usuario, 2: Responder pregunta
+  const [step, setStep] = useState(1);
   const [username, setUsername] = useState("");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [modalMessage, setModalMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+
+  const isStep1Valid = () => username.trim() !== '';
+  const isStep2Valid = () => answer.trim() !== '';
 
   const handleUserSubmit = (e) => {
     e.preventDefault();
@@ -29,26 +31,24 @@ function ForgotPassword() {
     }
   };
 
-const handleAnswerSubmit = (e) => {
-  e.preventDefault();
-  if (validateSecurityAnswer(username, answer)) {
-    setModalMessage("Respuesta correcta.");
-    setIsModalOpen(true);
+  const handleAnswerSubmit = (e) => {
+    e.preventDefault();
+    if (validateSecurityAnswer(username, answer)) {
+      setModalMessage("Respuesta correcta.");
+      setIsModalOpen(true);
 
-    // Guardar el usuario que va a restablecer su contraseña
-    localStorage.setItem("resetUser", username);
+      localStorage.setItem("resetUser", username);
 
-    setTimeout(() => {
-      setIsModalOpen(false);
-      navigate("/resetpassword");
-    }, 1000);
-  } else {
-    setModalMessage("Respuesta incorrecta. Inténtalo de nuevo.");
-    setIsModalOpen(true);
-  }
-};
+      setTimeout(() => {
+        setIsModalOpen(false);
+        navigate("/resetpassword");
+      }, 1000);
+    } else {
+      setModalMessage("Respuesta incorrecta. Inténtalo de nuevo.");
+      setIsModalOpen(true);
+    }
+  };
 
-  
   return (
     <div className="form-container">
       <a href="/login" className="back-arrow"></a>
@@ -65,11 +65,16 @@ const handleAnswerSubmit = (e) => {
                 placeholder="Usuario"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                required
               />
             </div>
           </div>
-          <button type="submit" className="btn btn-primary">Enviar</button>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={!isStep1Valid()}
+          >
+            Enviar
+          </button>
         </form>
       ) : (
         <form className="forgot-password-form" onSubmit={handleAnswerSubmit}>
@@ -83,15 +88,19 @@ const handleAnswerSubmit = (e) => {
                 placeholder="Ingresa tu respuesta"
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
-                required
               />
             </div>
           </div>
-          <button type="submit" className="btn btn-primary">Verificar</button>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={!isStep2Valid()}
+          >
+            Verificar
+          </button>
         </form>
       )}
 
-      {/* Modal */}
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">

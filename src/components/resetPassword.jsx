@@ -19,6 +19,15 @@ function ResetPassword() {
     }
   }, [username, navigate]);
 
+  const isFormValid = () => {
+    return (
+      password.trim() !== '' &&
+      password.length >= 8 &&
+      confirmPassword.trim() !== '' &&
+      password === confirmPassword
+    );
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -49,12 +58,10 @@ function ResetPassword() {
       if (result.success) {
         localStorage.removeItem("resetUser");
 
-        // 🔥 Esperamos 2.5 segundos y luego redirigimos
         setTimeout(() => {
           navigate("/login", { replace: true });
         }, 2500);
       } else {
-        // Si falla, cerramos modal luego de 2.5 s
         setTimeout(() => setIsModalOpen(false), 2500);
       }
     } catch (err) {
@@ -80,7 +87,6 @@ function ResetPassword() {
               placeholder="Ingresa tu nueva contraseña"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
             />
           </div>
         </div>
@@ -94,13 +100,16 @@ function ResetPassword() {
               placeholder="Confirma tu nueva contraseña"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              required
             />
           </div>
         </div>
 
         <div className="button-group">
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={!isFormValid()}
+          >
             Restablecer
           </button>
         </div>
