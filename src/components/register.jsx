@@ -13,6 +13,7 @@ function Register() {
   const [answer, setAnswer] = useState("");
   const [message, setMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   const questionOptions = [
@@ -25,40 +26,71 @@ function Register() {
   const customStyles = {
     container: (provided) => ({
       ...provided,
-      width: "350px", // Tamaño fijo
-      margin: "0 auto", // Centrado horizontal
+      width: "350px",
+      margin: "0 auto",
     }),
-    control: (provided) => ({
+    control: (provided, state) => ({
       ...provided,
       width: "100%",
-      height: "50px", // Altura fija
+      height: "50px",
       padding: "5px",
       display: "flex",
       alignItems: "center",
+      borderColor: errors.question ? '#ff3b30' : provided.borderColor,
+      '&:hover': {
+        borderColor: errors.question ? '#ff3b30' : provided.borderColor,
+      }
     }),
     singleValue: (provided) => ({
       ...provided,
       whiteSpace: "normal",
       wordWrap: "break-word",
-      overflow: "visible", // Evita corte del texto
+      overflow: "visible",
     }),
     menu: (provided) => ({
       ...provided,
-      width: "350px", // Asegura que el menú no cambie de tamaño
+      width: "350px",
       wordWrap: "break-word",
-      margin: "0 auto", // Centrar menú
-      textAlign: "center", // Centrar texto en el menú
+      margin: "0 auto",
+      textAlign: "center",
     }),
   };
-  
-  
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!username.trim()) {
+      newErrors.username = 'El nombre es obligatorio';
+    }
+
+    if (!email.trim()) {
+      newErrors.email = 'El correo electrónico es obligatorio';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = 'Ingresa un formato de correo válido';
+    }
+
+    if (!password.trim()) {
+      newErrors.password = 'La contraseña es obligatoria';
+    } else if (password.length < 8) {
+      newErrors.password = 'La contraseña debe tener al menos 8 caracteres';
+    }
+
+    if (!question) {
+      newErrors.question = 'Selecciona una pregunta de seguridad';
+    }
+
+    if (!answer.trim()) {
+      newErrors.answer = 'La respuesta es obligatoria';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleRegister = (e) => {
     e.preventDefault();
 
-    if (!question) {
-      setMessage("Por favor, selecciona una pregunta de seguridad.");
-      setIsModalOpen(true);
+    if (!validateForm()) {
       return;
     }
 
@@ -78,55 +110,98 @@ function Register() {
     }
   };
 
+  const handleFieldChange = (field, value) => {
+    if (errors[field]) {
+      setErrors({ ...errors, [field]: '' });
+    }
+
+    switch (field) {
+      case 'username':
+        setUsername(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      case 'question':
+        setQuestion(value);
+        break;
+      case 'answer':
+        setAnswer(value);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="container">
       <a href="/login" className="back-arrow"></a>
       <h1 className="title">Registrarme</h1>
 
       <form className="register-form" onSubmit={handleRegister}>
-        <input
-          type="text"
-          placeholder="Nombre"
-          aria-label="Nombre de usuario"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Correo Electrónico"
-          aria-label="Correo Electrónico"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          aria-label="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <div className="input-wrapper">
+          <input
+            type="text"
+            placeholder="Nombre"
+            aria-label="Nombre de usuario"
+            className={errors.username ? 'input-error' : ''}
+            value={username}
+            onChange={(e) => handleFieldChange('username', e.target.value)}
+          />
+          {errors.username && <span className="error-message">{errors.username}</span>}
+        </div>
 
-        <Select
-          placeholder="Selecciona una pregunta de seguridad"
-          options={questionOptions}
-          value={question}
-          onChange={setQuestion}
-          styles={customStyles}
-          isSearchable={false}
-          aria-label="Pregunta de seguridad"
-        />
+        <div className="input-wrapper">
+          <input
+            type="email"
+            placeholder="Correo Electrónico"
+            aria-label="Correo Electrónico"
+            className={errors.email ? 'input-error' : ''}
+            value={email}
+            onChange={(e) => handleFieldChange('email', e.target.value)}
+          />
+          {errors.email && <span className="error-message">{errors.email}</span>}
+        </div>
 
-        <input
-          type="text"
-          placeholder="Respuesta"
-          aria-label="Respuesta de seguridad"
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-          required
-        />
+        <div className="input-wrapper">
+          <input
+            type="password"
+            placeholder="Contraseña"
+            aria-label="Contraseña"
+            className={errors.password ? 'input-error' : ''}
+            value={password}
+            onChange={(e) => handleFieldChange('password', e.target.value)}
+          />
+          {errors.password && <span className="error-message">{errors.password}</span>}
+        </div>
+
+        <div className="input-wrapper">
+          <Select
+            placeholder="Selecciona una pregunta de seguridad"
+            options={questionOptions}
+            value={question}
+            onChange={(value) => handleFieldChange('question', value)}
+            styles={customStyles}
+            isSearchable={false}
+            aria-label="Pregunta de seguridad"
+          />
+          {errors.question && <span className="error-message">{errors.question}</span>}
+        </div>
+
+        <div className="input-wrapper">
+          <input
+            type="text"
+            placeholder="Respuesta"
+            aria-label="Respuesta de seguridad"
+            className={errors.answer ? 'input-error' : ''}
+            value={answer}
+            onChange={(e) => handleFieldChange('answer', e.target.value)}
+          />
+          {errors.answer && <span className="error-message">{errors.answer}</span>}
+        </div>
 
         <button type="submit">Registrarme</button>
       </form>
