@@ -147,7 +147,7 @@ const CrearCuentaBancaria = () => {
         <div className="color-selector-container">
           <label>Color de la cuenta:</label>
           <div className="color-options">
-            {["#9B02F4", "#F2FF00", "#FF2727", "#122757", "#005C53", "#011F26"].map(
+            {["#9B02F4", "#a9af34ff", "#ad322b", "#122757", "#005C53", "#011F26"].map(
               (color) => (
                 <div
                   key={color}
